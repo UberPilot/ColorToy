@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="angles.js"></script>
+    <script defer src="colors.js"></script>
+    <script defer src="generator.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="form-container">
+        <h1>Color Toy</h1>
+        <p class="subtitle">An experiment by UberPilot</p>
+        <h2>Base Settings</h2>
+        <div class="form-section">
+            <span class="form-row">
+                <label for="base">Initial Color (Hex)</label>
+                <input id="base" type="color" value="#df7126">
+            </span>
+        </div>
+        <h2>Parameters</h2>
+        <div class="form-section">
+            <span class="form-row">
+                <label for="luminance">Luminance Delta (Percent)</label>
+                <input id="luminance" type="number" value="10">
+            </span>
+            <span class="form-row">
+                <label for="hue">Hue Delta (Degrees)</label>
+                <input id="hue" type="number" value="10">
+            </span>
+            <span class="form-row">
+                <label for="ratio">Luminance-Saturation Ratio</label>
+                <input id="ratio" type="number" value="5">
+            </span>
+            <span class="form-row">
+                <label for="count">Count</label>
+                <input id="count" type="number" value="7">
+            </span>
+            <summary>
+                <h2>Additional Settings</h2>
+                <details>
+                    <span class="form-row">
+                        <label for="correct-yellow">Correct Yellow</label>
+                        <input id="correct-yellow" type="checkbox" checked>
+                    </span>
+                    <span class="form-row">
+                        <label for="yellow-hue">Yellow Hue</label>
+                        <input id="yellow-hue" type="number" value="60">
+                    </span>
+                    <span class="form-row">
+                        <label for="correct-blue">Correct Blue</label>
+                        <input id="correct-blue" type="checkbox" checked>
+                    </span>
+                    <span class="form-row">
+                        <label for="blue-hue">Blue Hue</label>
+                        <input id="blue-hue" type="number" value="240">
+                    </span>
+                </details>
+            </summary>
+        </div>
+        <!-- <div id="go" class="button"><p>Go!</p></div> -->
+        <h2>Results</h2>
+    <div id="target"></div>
+    </div>
+</body>
+
+</html>
