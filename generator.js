@@ -3,7 +3,6 @@ function makeColors(baseHex, luminanceShift, satLumRatio, hueShift, up, down, lu
     const luminanceShiftLow = luminanceShiftAlt == undefined ? luminanceShift : luminanceShiftAlt;
     const satLumRatioLow = satLumRatioAlt == undefined ? satLumRatio : satLumRatioAlt;
     const baseRGB = hexToRGB(baseHex);
-    console.log(baseRGB);
     const baseHSL = rgbToHsl(baseRGB.r, baseRGB.g, baseRGB.b);
     const stepLuminanceUp = Math.min((1.0 - baseHSL.l) / up, Math.max(luminanceShift, 0));
     const colors = [baseHSL];
@@ -43,7 +42,6 @@ function makeColors(baseHex, luminanceShift, satLumRatio, hueShift, up, down, lu
         }
         colors.push(newColor);
     }
-    console.log(colors);
     return colors.map((item) => { 
         const hsl = {h: item.h < 0 ? item.h + 1 : item.h, s: item.s, l: item.l };
         const rgb = hslToRgb(hsl.h, hsl.s, hsl.l);
@@ -57,7 +55,6 @@ function createColorContainersWithProps(base, luminance, satLumRatio, hue, up, d
 
     const target = document.querySelector('#target');
     target.innerHTML = '';
-    console.log(colors);
     colors.forEach((c) => {
         const child = document.createElement('span');
         child.style.backgroundColor = c.hex;
