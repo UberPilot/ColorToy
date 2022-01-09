@@ -52,20 +52,10 @@ function makeColors(baseHex, luminanceShift, satLumRatio, hueShift, up, down, lu
     });
 }
 
-function doTheThing() {
+function createColorContainersWithProps(base, luminance, satLumRatio, hue, up, down, luminanceLow, satLumRatioLow, hueLow, correctYellow, yellowHue, correctBlue, blueHue) {
+    const colors = makeColors(base, luminance, satLumRatio, hue, up, down, luminanceLow, satLumRatioLow, hueLow, correctYellow, yellowHue, correctBlue, blueHue);
+
     const target = document.querySelector('#target');
-    const base = document.querySelector('#base').value;
-    const luminance = parseFloat(document.querySelector('#luminance').value) / 100;
-    const hue = parseFloat(document.querySelector('#hue').value) / 360;
-    const satLumRatio = parseFloat(document.querySelector('#ratio').value) / 10;
-    const count = parseInt(document.querySelector('#count').value);
-    const correctYellow = document.querySelector('#correct-yellow').checked;
-    const yellowHue = parseFloat(document.querySelector('#yellow-hue').value) / 360;
-    const correctBlue = document.querySelector('#correct-blue').checked;
-    const blueHue = parseFloat(document.querySelector('#blue-hue').value) / 360;
-    const up = Math.ceil(count / 2);
-    const down = Math.floor(count / 2) - 1;
-    const colors = makeColors(base, luminance, satLumRatio, hue, up, down, luminance, satLumRatio, hue, correctYellow, yellowHue, correctBlue, blueHue);
     target.innerHTML = '';
     console.log(colors);
     colors.forEach((c) => {
@@ -90,14 +80,29 @@ function doTheThing() {
     })
 }
 
+function generateColors() {
+    const base = document.querySelector('#base').value;
+    const luminance = parseFloat(document.querySelector('#luminance').value) / 100;
+    const hue = parseFloat(document.querySelector('#hue').value) / 360;
+    const satLumRatio = parseFloat(document.querySelector('#ratio').value) / 10;
+    const count = parseInt(document.querySelector('#count').value);
+    const correctYellow = document.querySelector('#correct-yellow').checked;
+    const yellowHue = parseFloat(document.querySelector('#yellow-hue').value) / 360;
+    const correctBlue = document.querySelector('#correct-blue').checked;
+    const blueHue = parseFloat(document.querySelector('#blue-hue').value) / 360;
+    const up = Math.ceil(count / 2);
+    const down = Math.floor(count / 2) - 1;
+    createColorContainersWithProps(base, luminance, satLumRatio, hue, up, down, luminance, satLumRatio, hue, correctYellow, yellowHue, correctBlue, blueHue);
+}
+
 // document.querySelector("#go").addEventListener('click', () => doTheThing());
-document.querySelector("#base").addEventListener('change', () => doTheThing());
-document.querySelector("#luminance").addEventListener('change', () => doTheThing());
-document.querySelector("#hue").addEventListener('change', () => doTheThing());
-document.querySelector("#ratio").addEventListener('change', () => doTheThing());
-document.querySelector("#count").addEventListener('change', () => doTheThing());
-document.querySelector("#correct-yellow").addEventListener('change', () => doTheThing());
-document.querySelector("#yellow-hue").addEventListener('change', () => doTheThing());
-document.querySelector("#correct-blue").addEventListener('change', () => doTheThing());
-document.querySelector("#blue-hue").addEventListener('change', () => doTheThing());
-doTheThing();
+document.querySelector("#base").addEventListener('change', () => generateColors());
+document.querySelector("#luminance").addEventListener('change', () => generateColors());
+document.querySelector("#hue").addEventListener('change', () => generateColors());
+document.querySelector("#ratio").addEventListener('change', () => generateColors());
+document.querySelector("#count").addEventListener('change', () => generateColors());
+document.querySelector("#correct-yellow").addEventListener('change', () => generateColors());
+document.querySelector("#yellow-hue").addEventListener('change', () => generateColors());
+document.querySelector("#correct-blue").addEventListener('change', () => generateColors());
+document.querySelector("#blue-hue").addEventListener('change', () => generateColors());
+generateColors();
