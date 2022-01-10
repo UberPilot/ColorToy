@@ -11,12 +11,12 @@ function makeColors(baseHex, luminanceShift, satLumRatio, hueShift, up, down, lu
     for(let i = 0; i < up; i++) {
         const newColor = {...colors[0]};
         newColor.l += stepLuminanceUp;
-        newColor.s = Math.min(1, newColor.s + stepLuminanceUp / satLumRatio);
+        newColor.s = Math.max(0, newColor.s - stepLuminanceUp * satLumRatio / 4);
         if (Math.abs(newColor.h - yellowHue) < hueShiftUp && correctYellow) {
             newColor.h = yellowHue;
         }
         else {
-            newColor.h += hueShiftUp;
+            newColor.h += hueShiftUp * directionTowardsAngle(newColor.h * 360, yellowHue * 360);
             while (newColor.h > 1) {
                 newColor.h -= 1;
             }
@@ -27,12 +27,12 @@ function makeColors(baseHex, luminanceShift, satLumRatio, hueShift, up, down, lu
     for(let i = 0; i < down; i++) {
         const newColor = {...colors.slice(-1)[0]};
         newColor.l -= stepLuminanceDown;
-        newColor.s = Math.max(0, newColor.s - stepLuminanceDown / satLumRatioLow);
+        newColor.s = Math.min(1, newColor.s - stepLuminanceDown * satLumRatioLow);
         if (Math.abs(newColor.h - blueHue) < hueShiftDown && correctBlue) {
             newColor.h = blueHue;
         }
         else {
-            newColor.h -= hueShiftDown;
+            newColor.h += hueShiftDown * directionTowardsAngle(newColor.h * 360, blueHue * 360);
             while (newColor.h > 1) {
                 newColor.h -= 1;
             }

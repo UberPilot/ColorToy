@@ -1,5 +1,5 @@
 /**
- * Finds the direction towards another angle in degrees.
+ * Finds the direction in which angle a needs to rotate to reach angle b quickest.
  * 
  * @param {number} a The first angle in degrees.
  * @param {number} b The second angle in degrees.
@@ -7,8 +7,8 @@
  */
 function directionTowardsAngle(a, b) {
     return Math.sign(
-        (Math.cos(a * (180 / Math.PI))) * (Math.sin(b * (180 / Math.PI))) - 
-        (Math.sin(a * (180 / Math.PI))) * (Math.cos(b * (180 / Math.PI)))
+        (Math.cos(a * (Math.PI / 180))) * (Math.sin(b * (Math.PI / 180))) - 
+        (Math.sin(a * (Math.PI / 180))) * (Math.cos(b * (Math.PI / 180)))
     );
 }
 
