@@ -16,7 +16,7 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-D4DVXHXKM1"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+        function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
 
         gtag('config', 'G-D4DVXHXKM1');
@@ -24,60 +24,118 @@
 </head>
 
 <body>
-    <div class="form-container">
-        <h1>Color Toy</h1>
-        <p class="subtitle">An experiment by UberPilot</p>
-        <h2>Base Settings</h2>
-        <div class="form-section">
-            <span class="form-row">
-                <label for="base">Initial Color (Hex)</label>
-                <input id="base" type="color" value="#df7126">
-            </span>
+    <div class="rowswap">
+        <div class="form-container">
+            <h1>Color Toy</h1>
+            <p class="subtitle">
+                An <a href="https://github.com/UberPilot/ColorToy">experiment</a> 
+                by <a href="https://github.com/UberPilot">UberPilot</a>.
+            </p>
+            <p class="detail no-space">
+                Some colors used from <a href="https://www.nordtheme.com/">Nord Theme</a>.
+            </p>
+            <h2>Parameters</h2>
+            <div class="form-section">
+                <span class="form-row">
+                    <label for="base">Initial Color (Hex)</label>
+                    <input id="base" type="color" value="#df7126">
+                </span>
+                <p class="detail">
+                    The middle color to generate. All other colors are based off of
+                    this color.
+                </p>
+                <span class="form-row">
+                    <label for="luminance">Luminance Delta (Percent)</label>
+                    <input id="luminance" type="number" value="10">
+                </span>
+                <p class="detail">
+                    Luminance Delta is the amount of brightness changed per color;
+                    this number is used when it is less that the number of steps to
+                    take the starting color from light to dark.
+                </p>
+                <span class="form-row">
+                    <label for="hue">Hue Delta (Degrees)</label>
+                    <input id="hue" type="number" value="10">
+                </span>
+                <p class="detail">
+                    The amount to hue shift each color; this number is used when it
+                    is less than the total number of steps to yellow. To disable
+                    this behavior, check in the advanced settings.
+                </p>
+                <span class="form-row">
+                    <label for="ratio">Luminance-Saturation Ratio</label>
+                    <input id="ratio" type="number" value="5">
+                </span>
+                <p class="detail">
+                    The amount that saturation factors into each luminance step. A
+                    factor of this number is used in each direction.
+                </p>
+                <span class="form-row">
+                    <label for="count">Count</label>
+                    <input id="count" type="number" value="7">
+                </span>
+                <p class="detail">
+                    The number of colors to generate.
+                </p>
+                <summary>
+                    <h2>Advanced Settings</h2>
+                    <p>
+                        These settings give additional control over the process, but
+                        may result in undefined behavior.
+                    </p>
+                    <details>
+                        <h3>Correction</h3>
+                        <p class="detail">
+                            By default, the generator will not go past what is set as
+                            the yellow hue when generating brigher colors, nor go past
+                            the blue hue when generating darker colors. This unlocks
+                            that limitation.
+                        </p>
+                        <span class="form-row">
+                            <label for="correct-yellow">Correct Yellow</label>
+                            <input id="correct-yellow" type="checkbox" checked>
+                        </span>
+                        <span class="form-row">
+                            <label for="yellow-hue">Yellow Hue</label>
+                            <input id="yellow-hue" type="number" value="60">
+                        </span>
+                        <span class="form-row">
+                            <label for="correct-blue">Correct Blue</label>
+                            <input id="correct-blue" type="checkbox" checked>
+                        </span>
+                        <span class="form-row">
+                            <label for="blue-hue">Blue Hue</label>
+                            <input id="blue-hue" type="number" value="240">
+                        </span>
+                        <h3>Low Values</h3>
+                        <p class="detail">
+                            Low Values split the behavior of the generator; the
+                            above values will be used for generating brighter colors,
+                            and the below values will be used for generating darker
+                            colors.
+                        </p>
+                        <span class="form-row">
+                            <label for="use-low-values">Use Low Values</label>
+                            <input id="use-low-values" type="checkbox">
+                        </span>
+                        <span class="form-row">
+                            <label for="low-luminance">Low Luminance Delta (Percent)</label>
+                            <input id="low-luminance" type="number" value="10">
+                        </span>
+                        <span class="form-row">
+                            <label for="low-hue">Low Hue Delta (Degrees)</label>
+                            <input id="low-hue" type="number" value="10">
+                        </span>
+                        <span class="form-row">
+                            <label for="low-ratio">Low Luminance-Saturation Ratio</label>
+                            <input id="low-ratio" type="number" value="5">
+                        </span>
+                    </details>
+                </summary>
+            </div>
         </div>
-        <h2>Parameters</h2>
-        <div class="form-section">
-            <span class="form-row">
-                <label for="luminance">Luminance Delta (Percent)</label>
-                <input id="luminance" type="number" value="10">
-            </span>
-            <span class="form-row">
-                <label for="hue">Hue Delta (Degrees)</label>
-                <input id="hue" type="number" value="10">
-            </span>
-            <span class="form-row">
-                <label for="ratio">Luminance-Saturation Ratio</label>
-                <input id="ratio" type="number" value="5">
-            </span>
-            <span class="form-row">
-                <label for="count">Count</label>
-                <input id="count" type="number" value="7">
-            </span>
-            <summary>
-                <h2>Additional Settings</h2>
-                <details>
-                    <span class="form-row">
-                        <label for="correct-yellow">Correct Yellow</label>
-                        <input id="correct-yellow" type="checkbox" checked>
-                    </span>
-                    <span class="form-row">
-                        <label for="yellow-hue">Yellow Hue</label>
-                        <input id="yellow-hue" type="number" value="60">
-                    </span>
-                    <span class="form-row">
-                        <label for="correct-blue">Correct Blue</label>
-                        <input id="correct-blue" type="checkbox" checked>
-                    </span>
-                    <span class="form-row">
-                        <label for="blue-hue">Blue Hue</label>
-                        <input id="blue-hue" type="number" value="240">
-                    </span>
-                </details>
-            </summary>
-        </div>
-        <!-- <div id="go" class="button"><p>Go!</p></div> -->
-        <h2>Results</h2>
+        <div id="target"></div>
     </div>
-    <div id="target"></div>
 </body>
 
 </html>

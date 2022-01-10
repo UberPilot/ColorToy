@@ -87,9 +87,22 @@ function generateColors() {
     const yellowHue = parseFloat(document.querySelector('#yellow-hue').value) / 360;
     const correctBlue = document.querySelector('#correct-blue').checked;
     const blueHue = parseFloat(document.querySelector('#blue-hue').value) / 360;
+    const useLowValues = document.querySelector('#use-low-values').checked;
+    const lowLuminance = useLowValues ? parseFloat(document.querySelector('#low-luminance').value) / 100 : luminance;
+    const lowHue = useLowValues ? parseFloat(document.querySelector('#low-hue').value) / 360 : hue;
+    const lowRatio = useLowValues ? parseFloat(document.querySelector('#low-ratio').value) / 10 : satLumRatio;
     const up = Math.ceil(count / 2);
     const down = Math.floor(count / 2) - 1;
-    createColorContainersWithProps(base, luminance, satLumRatio, hue, up, down, luminance, satLumRatio, hue, correctYellow, yellowHue, correctBlue, blueHue);
+    createColorContainersWithProps(base, luminance, satLumRatio, hue, up, down, lowLuminance, lowRatio, lowHue, correctYellow, yellowHue, correctBlue, blueHue);
+}
+
+function updateLinked(name, value, cb) {
+    const el = document.querySelector(`#${name}`);
+    const linked = document.querySelector(`#${name}`);
+    if (linked.value == el.value) {
+        linked.value 
+    }
+    cb();
 }
 
 // document.querySelector("#go").addEventListener('click', () => doTheThing());
@@ -102,4 +115,8 @@ document.querySelector("#correct-yellow").addEventListener('change', () => gener
 document.querySelector("#yellow-hue").addEventListener('change', () => generateColors());
 document.querySelector("#correct-blue").addEventListener('change', () => generateColors());
 document.querySelector("#blue-hue").addEventListener('change', () => generateColors());
+document.querySelector("#use-low-values").addEventListener('change', () => generateColors());
+document.querySelector("#low-luminance").addEventListener('change', () => generateColors());
+document.querySelector("#low-hue").addEventListener('change', () => generateColors());
+document.querySelector("#low-ratio").addEventListener('change', () => generateColors());
 generateColors();
