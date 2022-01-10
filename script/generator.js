@@ -16,7 +16,7 @@ function makeColors(baseHex, luminanceShift, satLumRatio, hueShift, up, down, lu
             newColor.h = yellowHue;
         }
         else {
-            newColor.h += hueShiftUp * directionTowardsAngle(newColor.h * 360, yellowHue * 360);
+            newColor.h += hueShiftUp * (correctYellow ? directionTowardsAngle(newColor.h * 360, yellowHue * 360) : 1);
             while (newColor.h > 1) {
                 newColor.h -= 1;
             }
@@ -32,7 +32,7 @@ function makeColors(baseHex, luminanceShift, satLumRatio, hueShift, up, down, lu
             newColor.h = blueHue;
         }
         else {
-            newColor.h += hueShiftDown * directionTowardsAngle(newColor.h * 360, blueHue * 360);
+            newColor.h += hueShiftDown * (correctBlue ? directionTowardsAngle(newColor.h * 360, blueHue * 360) : 1);
             while (newColor.h > 1) {
                 newColor.h -= 1;
             }
