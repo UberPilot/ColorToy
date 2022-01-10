@@ -50,29 +50,40 @@ function makeColors(baseHex, luminanceShift, satLumRatio, hueShift, up, down, lu
     });
 }
 
-function createColorContainersWithProps(base, luminance, satLumRatio, hue, up, down, luminanceLow, satLumRatioLow, hueLow, correctYellow, yellowHue, correctBlue, blueHue) {
+function createColorContainersWithProps(base, luminance, satLumRatio, hue, up, down, luminanceLow, satLumRatioLow, hueLow, correctYellow, yellowHue, correctBlue, blueHue, indexed) {
     const colors = makeColors(base, luminance, satLumRatio, hue, up, down, luminanceLow, satLumRatioLow, hueLow, correctYellow, yellowHue, correctBlue, blueHue);
 
     const target = document.querySelector('#target');
     target.innerHTML = '';
-    colors.forEach((c) => {
+    colors.forEach((c, idx) => {
         const child = document.createElement('span');
         child.style.backgroundColor = c.hex;
         child.classList.add('color-container');
-        if (count > 28) {
-            child.classList.add('mini');
-        }
         child.addEventListener('click', () => {
             navigator.clipboard.writeText(c.hex);
         })
-        const lightChild = document.createElement('div');
-        lightChild.innerText = c.hex;
-        lightChild.classList.add('light');
-        child.appendChild(lightChild);
-        const darkChild = document.createElement('div');
-        darkChild.innerText = c.hex;
-        darkChild.classList.add('dark');
-        child.appendChild(darkChild);
+        const light = c.hsl.l < 0.5;
+
+        const hexChild = document.createElement('div');
+        hexChild.innerText = c.hex;
+
+        const indexChild = document.createElement('div');
+        indexChild.classList.add('index');
+        indexChild.classList.add('show');
+        indexChild.innerText = idx + 1;
+
+        if (light) {
+            hexChild.classList.add('light');
+            indexChild.classList.add('light');
+        }
+        else {
+            hexChild.classList.add('dark');
+            indexChild.classList.add('dark');
+        }
+        if (indexed) {
+            child.appendChild(indexChild);
+        }
+        child.appendChild(hexChild);
         target.appendChild(child);
     })
 }
@@ -91,9 +102,10 @@ function generateColors() {
     const lowLuminance = useLowValues ? parseFloat(document.querySelector('#low-luminance').value) / 100 : luminance;
     const lowHue = useLowValues ? parseFloat(document.querySelector('#low-hue').value) / 360 : hue;
     const lowRatio = useLowValues ? parseFloat(document.querySelector('#low-ratio').value) / 10 : satLumRatio;
+    const indexed = document.querySelector('#show-numbers').checked;
     const up = Math.ceil(count / 2);
     const down = Math.floor(count / 2) - 1;
-    createColorContainersWithProps(base, luminance, satLumRatio, hue, up, down, lowLuminance, lowRatio, lowHue, correctYellow, yellowHue, correctBlue, blueHue);
+    createColorContainersWithProps(base, luminance, satLumRatio, hue, up, down, lowLuminance, lowRatio, lowHue, correctYellow, yellowHue, correctBlue, blueHue, indexed);
 }
 
 function updateLinked(name, value, cb) {
@@ -119,4 +131,5 @@ document.querySelector("#use-low-values").addEventListener('change', () => gener
 document.querySelector("#low-luminance").addEventListener('change', () => generateColors());
 document.querySelector("#low-hue").addEventListener('change', () => generateColors());
 document.querySelector("#low-ratio").addEventListener('change', () => generateColors());
+document.querySelector("#show-numbers").addEventListener('change', () => generateColors());
 generateColors();
